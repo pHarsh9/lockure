@@ -14,7 +14,7 @@ connectDB()
 
 const app = express()
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: process.env.FRONTEND_URL,
   credentials: true
 }))
 
@@ -25,15 +25,15 @@ app.use('/api/passwords',require('./Routes/passwordRoutes'))
 app.use('/api/users',require('./Routes/userRoutes'))
 
 //Serve frontend
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(process.cwd(), '../frontend/dist')));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(process.cwd(), '../frontend/dist')));
 
-//   app.get('{*any}', (req, res) =>
-//     res.sendFile(path.resolve(process.cwd(), '../', 'frontend', 'dist', 'index.html'))
-//   );
-// } else {
-//   app.get('/', (req, res) => res.send('Please set to production'));
-// }
+  app.get('{*any}', (req, res) =>
+    res.sendFile(path.resolve(process.cwd(), '../', 'frontend', 'dist', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => res.send('Please set to production'));
+}
 
 app.use(errorHandler)
 

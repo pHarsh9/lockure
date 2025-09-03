@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import {useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import PasswordItem from '../components/PasswordItem'
-import PasswordForm from '../components/passwordForm'
+import PasswordForm from '../components/PasswordForm'
 import Spinner from '../components/Spinner'
 import { getPassword, reset } from '../features/passwords/passwordSlice'
 
